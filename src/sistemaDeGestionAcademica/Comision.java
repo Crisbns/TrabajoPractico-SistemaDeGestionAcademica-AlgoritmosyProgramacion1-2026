@@ -99,6 +99,23 @@ public class Comision {
 		}
 		return agregado;
 	}
+	/**
+	 * post: busca un alumno dentro del arreglo por su nombre.
+	 * @param nombre del alumno buscado
+	 * @return alumno, o null si no existe en dicha comisión
+	 */
+	public Alumno buscarAlumnoPorNombre(String nombre) {
+		Alumno alumnoEncontrado = null;
+		for (int i = 0; i < alumnos.length; i++) {
+			if (this.alumnos[i] != null && this.alumnos[i].obtenerNombre().equals(nombre)) {
+				alumnoEncontrado = this.alumnos[i];
+			}
+		}
+		if (alumnoEncontrado == null) {
+			throw new Error("El alumno no esta en la comision.");
+		}
+		return alumnoEncontrado;
+	}
 	
 	/**
 	 * post: busca un alumno dentro del arreglo por su legajo.
@@ -106,17 +123,12 @@ public class Comision {
 	 * @return el alumno encontrado, o null si no existe en la comisión
 	 */
 	public Alumno buscarAlumnoPorLegajo(int legajo) {
-		Alumno alumnoEncontrado = null;
-		int index = 0;
-
-		while (index < this.alumnos.length && alumnoEncontrado == null) {
-			if (this.alumnos[index] != null && this.alumnos[index].obtenerLegajo() == legajo) { // Ponemos el "alumnos[index] != null" por si creamos un Array de Alumnos de tamaño 10, pero solo agregamos 3, las otras posiciones serian null
-				alumnoEncontrado = this.alumnos[index];
-			}
-			index++;
-		}
-
-		return alumnoEncontrado;
+	    for (int i = 0; i < this.alumnos.length; i++) {
+	        if (this.alumnos[i] != null && this.alumnos[i].obtenerLegajo()==legajo) {
+	            return this.alumnos[i];
+	        }
+	    }
+	    return null;
 	}
 	
 	/**
